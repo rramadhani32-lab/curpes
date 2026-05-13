@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SVRFACE.STUDIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#0a0a0a;
+  --white:#f0ede8;
+  --blue:#1a3fff;
+  --blue-dark:#0f28cc;
+  --red:#e8210a;
+  --gray:#b8b4ae;
+  --border:rgba(240,237,232,0.12);
+}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+a {
+  text-decoration: none; /* Ini buat ngilangin garis bawahnya */
+  color: inherit; /* Ini kunci pentingnya! Biar warnanya ngikutin warna teks aslinya (putih), bukan jadi ungu/biru */
+}
+/* NAV */
+nav{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.25rem 2.5rem;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--black);z-index:100;
+}
+.nav-logo{
+  font-family:'Anton',sans-serif;
+  font-size:1.6rem;letter-spacing:0.12em;color:var(--white);
+}
+.nav-logo span{color:var(--blue);}
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 30px; /* Jarak antara Our Product dan The Drop */
+  margin: 0;
+  padding: 0;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropbtn {
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 12px; /* Sesuaikan dengan ukuran aslimu */
+  letter-spacing: 1px;
+  padding: 10px 0;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #111111; /* Warna background gelap */
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5); /* Efek bayangan */
+  z-index: 10;
+  top: 100%; /* Muncul tepat di bawah teks */
+  left: 0;
+  border: 1px solid #333333; /* Garis tepi tipis biar rapi */
+  border-radius: 4px;
+}
+.dropdown-content a {
+  color: #cccccc;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.dropdown-content a:hover {
+  background-color: #2a2a2a; /* Warna lebih terang sedikit saat dihover */
+  color: #ffffff;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.nav-drop{
+  color:var(--white) !important;
+  padding:0.5rem 1.1rem;font-size:0.rem !important;
+}
+
+/* HERO */
+.hero{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:90vh;border-bottom:1px solid var(--border);
+}
+.hero-left{
+  padding:4rem 2.5rem;
+  display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid var(--border);
+}
+.hero-issue{
+  font-family:'Space Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.2em;color:var(--gray);text-transform:uppercase;
+  border:1px solid var(--border);display:inline-block;
+  padding:0.35rem 0.75rem;width:fit-content;margin-bottom:3rem;
+}
+.hero-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(4.5rem,9vw,8.5rem);
+  line-height:0.88;letter-spacing:0.03em;
+  text-transform:uppercase;
+  text-align:center;
+}
+.hero-title .stroke{
+  -webkit-text-stroke:1.5px var(--white);
+  color:transparent;
+}
+.hero-title .blue{color:var(--blue);text-align:center;display:block;}
+.hero-divider{
+  width:3rem;height:2px;background:var(--blue);margin:2.5rem 0;
+}
+.hero-sub{
+  font-size:0.9rem;color:var(--gray);line-height:1.8;font-weight:300;
+  max-width:38ch;margin-bottom:3rem;font-family:'Space Mono',monospace;
+  font-size:0.72rem;letter-spacing:0.03em;
+}
+.hero-sub em{color:var(--white);font-style:normal;}
+.hero-ctas{display:flex;gap:1rem;align-items:center;}
+.btn-blue{
+  background:var(--blue);color:var(--white);
+  padding:0.875rem 1.75rem;border:none;border-radius:0;
+  font-family:'Space Mono',monospace;font-size:0.72rem;
+  letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;
+  transition:background 0.2s;
+}
+.btn-blue:hover{background:var(--blue-dark);}
+.btn-ghost{
+  background:transparent;color:var(--white);
+  border:1px solid var(--border);
+  padding:0.875rem 1.75rem;border-radius:0;
+  font-family:'Space Mono',monospace;font-size:0.72rem;
+  letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;
+  transition:border-color 0.2s;
+}
+.btn-ghost:hover{border-color:rgba(240,237,232,0.5);}
+
+.hero-right{
+  background:#111;
+  display:grid;grid-template-rows:1fr auto;
+  position:relative;overflow:hidden;
+}
+.hero-img-area {
+  position: relative; /* Wajib ada buat tombol absolut */
+  overflow: hidden; /* Sembunyikan bagian gambar yang berlebih */
+  width: 100%; /* Lebar kotak penuh di area kanannya */
+  display: flex; /* Pertahankan flex */
+  align-items: center; /* Konten di tengah secara vertikal */
+  justify-content: center; /* Konten di tengah secara horizontal */
+  padding: 0; /* Padding kita hapus aja dulu biar gambar full */
+  
+  /* 👇 KUNCI STABILITASNYA 👇 */
+  height: 600px; /* <--- GANTI ANGKA INI: Atur tinggi yang lu mau secara tetap di sini. Misalnya 600px, 700px, atau sesuai selera */
+  max-height: 80vh; /* (Optional) Atau atur tinggi berdasarkan 80% tinggi layar monitor */
+}
+.hero-badge {
+  position: absolute;
+  top: 30px; /* Jarak dari atas */
+  right: 30px; /* Jarak dari kanan */
+  background-color: #ff2a2a; /* Warna merah SVRFACE */
+  color: #ffffff;
+  padding: 8px 16px;
+  font-family: 'Space Mono', monospace; /* Biar seragam sama font lu yang lain */
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.15em;
+  z-index: 20; /* Wajib ada biar melayang di atas gambar slider */
+}
+.prev-btn, .next-btn {
+  cursor: pointer;
+  position: absolute;
+  top: 50%; /* Taruh di tengah-tengah secara vertikal */
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5); /* Background hitam transparan */
+  color: white; /* Warna panah putih */
+  border: none;
+  padding: 12px 18px;
+  font-size: 18px;
+  transition: 0.3s ease;
+  border-radius: 4px; /* Ujung tombol sedikit melengkung */
+  z-index: 10; /* Biar tombolnya gak ketutup gambar */
+}
+
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
+
+.prev-btn:hover, .next-btn:hover {
+  background-color: rgba(255, 255, 255, 0.9); /* Berubah jadi putih */
+  color: black; /* Warna panah jadi hitam */
+}
+.slide-item {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.slide-item.active {
+  display: block;
+  animation: fadeEffect 1.5s ease-in-out;
+}
+@keyframes fadeEffect {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* ============================================
+   GANTI BAGIAN INI DENGAN FOTO PRODUK LO
+   Hapus .tshirt-mock dan .hero-img-hint
+   Ganti dengan: <img src="foto-produk.jpg" style="width:100%;height:100%;object-fit:cover;">
+   ============================================ */
+.tshirt-mock{
+  width:200px;height:230px;
+  background:#1a1a1a;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:0.5rem;
+}
+.tshirt-mock .label{
+  font-family:'Anton',sans-serif;font-size:1.4rem;
+  letter-spacing:0.15em;color:var(--white);opacity:0.6;
+}
+.tshirt-mock .sub{
+  font-family:'Space Mono',monospace;font-size:0.55rem;
+  letter-spacing:0.2em;color:var(--gray);text-transform:uppercase;
+}
+.hero-img-hint{
+  font-family:'Space Mono',monospace;font-size:0.6rem;
+  color:var(--gray);letter-spacing:0.15em;text-transform:uppercase;
+  opacity:0.5;
+}
+.hero-ticker{
+  padding:1rem 2rem;
+  border-top:1px solid var(--border);
+  display:flex;gap:2rem;overflow:hidden;
+  font-family:'Space Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.15em;text-transform:uppercase;color:var(--gray);
+}
+.ticker-item{display:flex;align-items:center;gap:0.75rem;white-space:nowrap;}
+.ticker-dot{width:4px;height:4px;background:var(--blue);flex-shrink:0;}
+.hero-badge{
+  position:absolute;top:2rem;right:2rem;
+  background:var(--red);
+  font-family:'Anton',sans-serif;font-size:0.75rem;
+  letter-spacing:0.1em;padding:0.5rem 1rem;
+  color:var(--white);
+}
+
+/* MARQUEE */
+.marquee-strip{
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:0.9rem 0;overflow:hidden;
+  background:#111;
+}
+.marquee-track{
+  display:flex;gap:3rem;width:max-content;
+  animation:marquee 18s linear infinite;
+}
+.marquee-track span{
+  font-family:'Anton',sans-serif;font-size:0.9rem;
+  letter-spacing:0.2em;color:var(--gray);text-transform:uppercase;
+  white-space:nowrap;
+}
+.marquee-track .accent{color:var(--blue);}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* CATEGORIES */
+.section-label{
+  font-family:'Space Mono',monospace;
+  letter-spacing:0.3em;color:var(--gray);text-transform:uppercase;
+  padding:2rem 2.5rem 1rem;border-bottom:1px solid var(--border);
+}
+/* =========================================
+   1. LAYOUT SLIDER & WRAPPER
+   ========================================= */
+.koleksi-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.categories {
+  display: flex;
+  overflow-x: hidden; /* Kunci scroll biar gak geser pake jari/mouse */
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.categories::-webkit-scrollbar {
+  display: none;
+}
+
+.cat-item {
+  min-width: 33.333%;
+  flex-shrink: 0;
+  box-sizing: border-box; /* Biar padding gak nambah lebar total */
+  padding: 2.5rem;
+  border-right: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid var(--border);
+}
+
+.cat-item:hover {
+  background: #111;
+}
+
+/* =========================================
+   2. TOMBOL PANAH
+   ========================================= */
+.btn-koleksi {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+
+.btn-koleksi:hover {
+  opacity: 1;
+  background-color: white;
+  color: black;
+}
+
+.btn-koleksi.left { left: 15px; }
+.btn-koleksi.right { right: 15px; }
+
+/* =========================================
+   3. STYLING FONT & KOTAK GAMBAR
+   ========================================= */
+.cat-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--blue);
+  margin-bottom: 1.5rem;
+}
+
+/* =========================================
+   UPDATE KOTAK GAMBAR & WATERMARK
+   ========================================= */
+.cat-box {
+  width: 100%;
+  height: 300px; /* Kita tinggiin dari 120px jadi 300px biar bajunya bisa gede! */
+  background: #111; /* Bikin background sedikit beda dari hitam pekat layar */
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  
+  /* Dua baris ini wajib buat nahan watermark biar gak keluar kotak */
+  position: relative; 
+  overflow: hidden; 
+}
+
+/* Ini trik CSS buat bikin Watermark tanpa perlu ngedit HTML */
+.cat-box::before {
+  content: 'SVRFACE'; /* Teks yang mau ditampilin di background */
+  position: absolute;
+  font-family: 'Anton', sans-serif; /* Pake font andalan lu */
+  font-size: 5rem; /* Ukurannya dibikin raksasa */
+  color: rgba(255, 255, 255, 0.04); /* Warnanya putih tapi transparan banget (cuma 4%) */
+  white-space: nowrap;
+  z-index: 1; /* Posisinya di belakang gambar */
+  letter-spacing: 0.1em;
+}
+
+.cat-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  
+  /* Dua baris ini wajib biar gambarnya ada di ATAS watermark */
+  position: relative; 
+  z-index: 2; 
+}
+
+.cat-name {
+  font-family: 'Anton', sans-serif; /* Balikin font judulnya ke Anton */
+  font-size: 1.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.cat-desc {
+  font-size: 0.75rem;
+  color: var(--gray);
+  font-family: 'Space Mono', monospace; /* Balikin font deskripsi ke Space Mono */
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+}
+
+.cat-cta {
+  margin-top: 1.5rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--blue);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: gap 0.2s;
+}
+
+.cat-item:hover .cat-cta { gap: 0.8rem; }
+
+/* MANIFESTO */
+.manifesto{
+  display:grid;grid-template-columns:1fr 2fr;
+  border-top:1px solid var(--border);
+}
+.manifesto-left{
+  padding:4rem 2.5rem;border-right:1px solid var(--border);
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.m-tag{
+  font-family:'Space Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.25em;color:var(--blue);text-transform:uppercase;
+  margin-bottom:2rem;
+}
+.m-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(2.5rem,4vw,4rem);
+  line-height:1;letter-spacing:0.04em;text-transform:uppercase;
+}
+.m-title .stroke{
+  -webkit-text-stroke:1px var(--white);
+  color:transparent;display:block;
+}
+.m-num{
+  font-family:'Anton',sans-serif;font-size:5rem;
+  color:var(--border);letter-spacing:0.05em;
+  margin-top:2rem;
+}
+.manifesto-right{
+  padding:4rem 2.5rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+}
+.m-point{padding:1.5rem;border:1px solid var(--border);}
+.m-point-num{
+  font-family:'Space Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.2em;color:var(--blue);margin-bottom:1rem;
+}
+.m-point-title{
+  font-family:'Anton',sans-serif;font-size:1.1rem;
+  letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.75rem;
+}
+.m-point-body{
+  font-family:'Space Mono',monospace;font-size:0.65rem;
+  color:var(--gray);line-height:1.8;letter-spacing:0.02em;
+}
+
+/* CTA */
+.cta-block{
+  padding:6rem 2.5rem;text-align:center;
+  border-top:1px solid var(--border);
+  background:#0d0d0d;
+  position:relative;overflow:hidden;
+}
+.cta-bg-text{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Anton',sans-serif;font-size:clamp(6rem,14vw,13rem);
+  color:rgba(255,255,255,0.03);letter-spacing:0.05em;white-space:nowrap;
+  pointer-events:none;user-select:none;
+}
+.cta-tag{
+  font-family:'Space Mono',monospace;font-size:0.65rem;
+  letter-spacing:0.3em;color:var(--blue);text-transform:uppercase;
+  margin-bottom:1.5rem;
+}
+.cta-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(3rem,6vw,5.5rem);
+  line-height:0.92;letter-spacing:0.03em;text-transform:uppercase;
+  margin-bottom:1.5rem;position:relative;
+}
+.cta-title .blue{color:var(--blue);}
+.cta-sub{
+  font-family:'Space Mono',monospace;font-size:0.72rem;
+  color:var(--gray);line-height:1.8;letter-spacing:0.04em;
+  margin-bottom:2.5rem;position:relative;
+}
+.cta-actions{display:flex;justify-content:center;gap:1rem;position:relative;}
+
+/* FOOTER */
+footer{
+  padding:1.5rem 2.5rem;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-logo{
+  font-family:'Anton',sans-serif;font-size:1.25rem;
+  letter-spacing:0.15em;
+}
+.footer-logo span{color:var(--blue);}
+.footer-right{
+  font-family:'Space Mono',monospace;font-size:0.6rem;
+  letter-spacing:0.12em;color:var(--gray);text-transform:uppercase;
+}
+/* =========================================
+   MODE RESPONSIVE / TAMPILAN HP
+   ========================================= */
+@media screen and (max-width: 768px) {
+  
+  /* 1. Ubah Hero Section jadi Atas-Bawah */
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    /* Catatan: Pakai flex column biar gampang numpuknya dari atas ke bawah */
+  }
+
+  /* 2. Bikin lebar kontennya full 100% */
+  .hero-left, .hero-right {
+    width: 100%;
+  }
+
+  /* 3. Sesuaikan tinggi kotak gambar slider di HP */
+  .hero-img-area {
+    height: 450px; /* Di HP dibikin lebih pendek dikit biar teks bawahnya tetep keliatan pas pertama buka */
+  }
+
+  /* 4. (Opsional) Rapihin jarak tulisan di HP biar gak terlalu mepet ke pinggir layar */
+  .hero-left {
+    padding: 2rem 1.5rem;
+    text-align: center; /* Kalo mau teksnya jadi di tengah pas di HP, nyalain ini */
+  }
+  
+  /* Bikin tombol OUR PRODUCT / Navbar rata di HP (kalo perlu) */
+  nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  /* ... kode media query lu yang sebelumnya ... */
+
+  /* 1. Bikin semua konten di hero-left ke tengah */
+  .hero-left {
+    align-items: center; /* Ngetengahin elemen kalo dia pakai flex */
+    text-align: center; /* Ngetengahin teksnya */
+  }
+
+  /* 2. Targetin paragraf "More than a brand..." (biar aman kalo dia punya lebar fix) */
+  .hero-left p {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* 3. Bikin deretan tombol SHOP THE DROP dan OUR STORY ke tengah */
+  .hero-ctas {
+    justify-content: center; /* Ngetengahin isi di dalam flexbox secara horizontal */
+    width: 100%;
+  }
+  /* =========================================
+     PERBAIKAN KOTAK MANIFESTO BIAR NGE-FIT
+     ========================================= */
+  
+  /* Ngecilin jarak (padding) di dalem kotak 01, 02, 03, 04 khusus di HP */
+  .manifesto > div:not(:first-child) {
+    padding: 1.5rem 1rem !important; /* Ini kuncinya! Kita sunat paddingnya khusus di HP biar teksnya napas */
+  }
+
+  /* Rapiin ukuran judul di dalem kotaknya (BEYOND TREND, dll) */
+  .manifesto > div:not(:first-child) h3 { /* Sesuaikan kalau lu pakenya tag h2 atau h4 ya */
+    font-size: 1.1rem !important;
+    margin-bottom: 0.75rem !important;
+    word-wrap: break-word; /* Biar kata yang panjang gak jebol ke luar kotak */
+  }
+
+  /* Rapiin teks deskripsinya */
+  .manifesto > div:not(:first-child) p {
+    font-size: 0.7rem !important; /* Dikecilin dikit biar muat */
+    line-height: 1.5 !important;
+  }
+  /* =========================================
+     PERBAIKAN FOOTER BIAR MENTOK KANAN-KIRI
+     ========================================= */
+  footer {
+    display: flex !important;
+    justify-content: space-between !important; /* Paksa elemen mepet ke ujung kiri dan kanan */
+    align-items: flex-end !important; /* Biar bawahnya sejajar rapi */
+    width: 100%;
+    padding-left: 1.5rem; /* Samain jarak aman kiri layarnya */
+    padding-right: 1.5rem; /* Samain jarak aman kanan layarnya */
+    box-sizing: border-box;
+  }
+
+  /* Nargetin elemen anak terakhir di dalem footer (tulisan 2024 Bekasi) */
+  footer > *:last-child {
+    text-align: right !important; /* Teksnya dibikin rata kanan */
+    margin-left: auto; /* Trik sakti dorong elemen mentok ke kanan */
+    max-width: 60%; /* Biar kalau kepanjangan dia turun ke bawah, gak nabrak logo SVRFACE di kiri */
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">SVRFACE.STUDIO</div>
+  <ul class="nav-links">
+    <li class="dropdown">
+    <a href="#" class="dropbtn">Menu &#9662;</a>
+    <div class="dropdown-content">
+      <a href="#oa">Our Articles</a>
+      <a href="#ob">Manifesto</a>
+      <a href="#oc">Article 3</a>
+    </div>
+    </li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div>
+      <div class="hero-issue">Made by love from Bekasi</div>
+      <h1 class="hero-title">
+        <span class="stroke">VISION</span><br>
+        <span class="blue">ON THE</span>
+        <span>SURFACE</span>
+      </h1>
+      <div class="hero-divider"></div>
+      <p class="hero-sub">
+        More than a brand — <em>it's a mindset.</em><br>
+        Dirancang untuk mereka yang hidup di luar permukaan.
+      </p>
+    </div>
+    <div class="hero-ctas">
+      <button class="btn-blue"><a href="https://www.instagram.com/svrface.shop/" target="_blank">Shop The Drop</a></button>
+      <button class="btn-ghost"><a href="our-story/index.html" target="_blank">Our Story</a></button>
+    </div>
+  </div>
+  <div class="hero-right">
+<div class="slide-item active">
+        <img src="surface.jpeg" alt="SVRFACE Product 1" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    
+    <div class="slide-item">
+        <img src="surface2.jpeg" alt="SVRFACE Product 2" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+    <button class="prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+    <button class="next-btn" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+    <div class="hero-badge">NEW DROP</div>
+      </div>
+  </div>
+</section>
+
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>SVRFACE STUDIO</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>VISION ON THE SURFACE</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>SVRFACE STUDIO</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>VISION ON THE SURFACE</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>SVRFACE STUDIO</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>VISION ON THE SURFACE</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>SVRFACE STUDIO</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>VISION ON THE SURFACE</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>SVRFACE STUDIO</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>VISION ON THE SURFACE</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+    <span>SVRFACE STUDIO</span><span class="accent"> <img src="logo.jpeg" height="25" width="25"> </span>
+  </div>
+</div>
+
+<div id="oa" class="section-label" style="font-size:20px; text-align: center;">— Our Articles —</div>
+<div class="koleksi-wrapper">
+  <button class="btn-koleksi left" onclick="slideKoleksi(-1)">&#10094;</button>
+  <section class="categories slider-koleksi">
+
+    <a href="https://www.instagram.com/p/DRkvMoHk1Ob/?img_index=1" target="_blank" class="cat-item">
+      <div class="cat-num">01 / 04</div>
+      <div class="cat-box"><img src="OCTO RIOT.png" alt="OCTO RIOT"></div>
+      <h3 class="cat-name">OCTO RIOT</h3>
+      <p class="cat-desc">Basic yang bukan biasa. Bahan premium, grafis kuat, statement di setiap jahitan.</p>
+      <div class="cat-cta">Lihat Koleksi →</div>
+    </a>
+    
+    <a href="https://www.instagram.com/p/DRkvSewkxCR/?img_index=1" target="_blank" class="cat-item">
+      <div class="cat-num">02 / 04</div>
+      <div class="cat-box"><img src="STAHLHELM.png" alt="STAHLHELM"></div>
+      <h3 class="cat-name">STAHLHELM</h3>
+      <p class="cat-desc">Potongan yang hidup di antara street dan studio. Built untuk dipakai, bukan disimpan.</p>
+      <div class="cat-cta">Lihat Koleksi →</div>
+    </a>
+    
+    <a href="https://www.instagram.com/p/DVbIg1lEo3E/?img_index=1" target="_blank" class="cat-item">
+      <div class="cat-num">03 / 04</div>
+      <div class="cat-box"><img src="W QUOTE.png" alt="W QUOTE"></div>
+      <h3 class="cat-name">W QUOTE</h3>
+      <p class="cat-desc">Dari pagi sampai malam. Versatile, clean, dan tetap punya karakter.</p>
+      <div class="cat-cta">Lihat Koleksi →</div>
+    </a>
+
+    <a href="https://www.instagram.com/p/DVbUA3IkmiT/?img_index=1" target="_blank" class="cat-item">
+      <div class="cat-num">04 / 04</div>
+      <div class="cat-box"><img src="ARMA TOLLITE.png" alt="ARMA TOLLITE"></div>
+      <h3 class="cat-name">ARMA TOLLITE</h3>
+      <p class="cat-desc">Pelengkap identitas. Dibuat untuk melindungi dari matahari dan tatapan orang.</p>
+      <div class="cat-cta">Lihat Koleksi →</div>
+    </a>
+  </section>
+
+  <button class="btn-koleksi right" onclick="slideKoleksi(1)">&#10095;</button>
+</div>
+
+<section class="manifesto">
+  <div class="manifesto-left">
+    <div>
+      <div class="m-tag">— Manifesto</div>
+      <h2 class="m-title">
+        IT'S A<br>
+        <span class="stroke">MIND</span>
+        SET.
+      </h2>
+    </div>
+    <div class="m-num">004</div>
+  </div>
+  <div class="manifesto-right">
+    <div class="m-point">
+      <div class="m-point-num">01</div>
+      <div class="m-point-title">Beyond Trend</div>
+      <p class="m-point-body">Kami tidak kejar tren. Kami bikin sesuatu yang bertahan lebih lama dari musimnya.</p>
+    </div>
+    <div class="m-point">
+      <div class="m-point-num">02</div>
+      <div class="m-point-title">Made With Intent</div>
+      <p class="m-point-body">Setiap desain punya maksud. Bukan filler, bukan noise — pure signal.</p>
+    </div>
+    <div class="m-point">
+      <div class="m-point-num">03</div>
+      <div class="m-point-title">Wear Your Mindset</div>
+      <p class="m-point-body">Pakaian lo ngomong sebelum lo ngomong. Pastiin yang disampaikan itu lo yang sebenarnya.</p>
+    </div>
+    <div class="m-point">
+      <div class="m-point-num">04</div>
+      <div class="m-point-title">Bekasi Built</div>
+      <p class="m-point-body">Lahir dari kota yang keras, tumbuh di culture yang jujur. SVRFACE untuk yang ngerti.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-block">
+  <div class="cta-bg-text">SVRFACE</div>
+  <p class="cta-tag">— The Drop is Live</p>
+  <h2 class="cta-title">READY TO <span class="stroke">SURFACE </span><br>YOUR <span class="blue">VISION?</span></h2>
+  <p class="cta-sub">Koleksi terbaru sudah tersedia. Stok terbatas — jangan sampai ketinggalan.</p>
+  <div class="cta-actions">
+    <button class="btn-blue"> <a href="https://linktr.ee/svrface.studio" target="_blank">Shop Now →</a></button>
+    <button class="btn-ghost"><a href="https://www.instagram.com/svrface.studio/" target="_blank">@svrface.studio</a></button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">SVRFACE STUDIO</div>
+  <div class="footer-right">© 2025 — Bekasi, Indonesia — svrface.studio</div>
+</footer>
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  // Fungsi yang dipanggil pas tombol di-klik
+  function changeSlide(n) {
+    showSlides(slideIndex += n);
+  }
+
+  // Fungsi utama untuk nampilin gambar
+  function showSlides(n) {
+    let slides = document.querySelectorAll(".slide-item");
+    
+    // Kalau udah di gambar terakhir terus diklik 'Next', balik ke gambar pertama
+    if (n > slides.length) { slideIndex = 1 }
+    
+    // Kalau lagi di gambar pertama terus diklik 'Prev', pergi ke gambar terakhir
+    if (n < 1) { slideIndex = slides.length }
+    
+    // Sembunyikan semua gambar dulu
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove("active");
+    }
+    
+    // Tampilkan gambar sesuai index yang aktif saat ini
+    slides[slideIndex - 1].classList.add("active");
+  }
+  function slideKoleksi(arah) {
+    const slider = document.querySelector('.slider-koleksi');
+    // Ngukur lebar satu item biar gesernya pas 1 kotak
+    const ukuranGeser = slider.clientWidth / 3; 
+    
+    slider.scrollBy({
+      left: arah * ukuranGeser, 
+      behavior: 'smooth'
+    });
+  }
+</script> 
+</body>
+</html>

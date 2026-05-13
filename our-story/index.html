@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story - SVRFACE.STUDIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --black:#0a0a0a;
+  --white:#f0ede8;
+  --blue:#1a3fff;
+  --blue-dark:#0f28cc;
+  --red:#e8210a;
+  --gray:#b8b4ae;
+  --border:rgba(240,237,232,0.12);
+}
+body{font-family:'DM Sans',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+a {
+  text-decoration: none; 
+  color: inherit; 
+}
+
+/* =========================================
+   NAVBAR (SAMA PERSIS KAYA HALAMAN UTAMA)
+   ========================================= */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--border);
+  position: sticky; /* Biar navbarnya tetep di atas pas di-scroll */
+  top: 0;
+  background-color: var(--black);
+  z-index: 100;
+}
+
+.logo {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  padding: 10px 0;
+  font-family: 'Space Mono', monospace;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #111111;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.5);
+  z-index: 10;
+  top: 100%;
+  right: 0; /* Biar dropdownnya gak keluar batas layar kanan */
+  border: 1px solid #333333;
+  border-radius: 4px;
+}
+
+.dropdown-content a {
+  color: #cccccc;
+  padding: 12px 16px;
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  font-family: 'Space Mono', monospace;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* =========================================
+   HALAMAN STORY
+   ========================================= */
+/* 1. Pengaturan untuk background container-nya */
+.story-hero {
+  padding: 8rem 2rem 4rem; 
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  
+  background-image: url("../logo.jpeg"); 
+  background-size: 25% auto; 
+  background-position: left center;
+  background-repeat: repeat-x; 
+}
+
+/* 2. Pengaturan KHUSUS untuk teks besar (VISION ON THE SURFACE) */
+.story-title {
+  text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.7); 
+  -webkit-text-stroke: 1.5px black; /* Outline cuma berlaku di sini */
+}
+
+/* 3. Pengaturan KHUSUS untuk teks kecil (EST. 2024...) */
+.story-subtitle {
+  -webkit-text-stroke: 0; /* Memastikan teks kecil ini terbebas dari outline */
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9); /* Dikasih shadow agak tebal dikit biar tetap kebaca jelas di atas logo putih */
+}
+
+.story-title {
+  font-family: 'Anton', sans-serif;
+  font-size: 5rem; /* GW BENERIN JADI 5rem BIAR GEDE! */
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+}
+
+.story-subtitle {
+  font-family: 'Space Mono', monospace;
+  color: var(--white);
+  letter-spacing: 0.2em;
+  font-size: 0.8rem;
+}
+
+.story-content {
+  padding: 4rem 2rem;
+  background-color: #0a0a0a;
+}
+
+.story-text-box {
+  max-width: 700px; 
+  margin: 0 auto; 
+}
+
+.story-text-box h2 {
+  font-family: 'Anton', sans-serif;
+  color: white;
+  font-size: 2.5rem;
+  margin: 3rem 0 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.story-text-box p {
+  font-family: 'Space Mono', monospace;
+  color: #cccccc;
+  line-height: 1.8;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  text-align: justify; 
+}
+
+.story-text-box strong {
+  color: white;
+}
+
+.story-image {
+  width: 100%;
+  height: 400px;
+  background: #111;
+  border: 1px solid var(--border);
+  margin: 3rem 0 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.story-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  filter: grayscale(100%); 
+}
+.story-image-1 {
+  width: 100%;
+  height: 300px; /* Tingginya tetep 300px saklek */
+  background: #111;
+  border: 1px solid var(--border);
+  margin: 3rem 0 4rem;
+  filter: grayscale(100%);
+  background-image: url("../sablon.jpeg"); 
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+/* =========================================
+   FOOTER (SAMA PERSIS KAYA HALAMAN UTAMA)
+   ========================================= */
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 2rem 3rem;
+  border-top: 1px solid var(--border);
+}
+
+.footer-left {
+  font-family: 'Anton', sans-serif;
+  font-size: 1.5rem;
+  color: var(--white);
+  line-height: 1;
+}
+
+.footer-right {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--gray);
+  letter-spacing: 0.1em;
+}
+
+/* --- Tampilan HP --- */
+@media screen and (max-width: 768px) {
+  nav {
+    padding: 1rem 1.5rem;
+  }
+  .story-title {
+    font-size: 3.5rem; 
+  }
+  .story-text-box h2 {
+    font-size: 2rem;
+  }
+  .story-image {
+    height: 250px;
+  }
+  footer {
+    padding: 1.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+    <nav>
+        <a href="../surfacestudio.html" class="logo">SVRFACE.STUDIO</a>
+    </nav>
+
+    <section class="story-hero" style="background-image: url(../logo.jpeg);">
+        <h1 class="story-title">VISION ON THE <span style="color: #0044ff;">SURFACE</span></h1>
+        <p class="story-subtitle">EST. 2024 — BEKASI, INDONESIA</p>
+    </section>
+
+    <section class="story-content">
+        <div class="story-text-box">
+            <h2>IT STARTED WITH A MINDSET.</h2>
+            <p>SVRFACE lahir bukan sekadar dari keinginan untuk membuat pakaian. Kami lahir dari rasa muak terhadap tren yang datang dan pergi. Kami ingin membangun sesuatu yang bertahan lebih lama dari musimnya.</p>
+            <p>Dirancang di Bekasi, dibangun untuk mereka yang hidup di luar permukaan. Kami merancang setiap jahitan, setiap potongan, dan setiap grafis dengan satu tujuan: <strong>Intent (Maksud)</strong>. Tidak ada <strong>filler</strong>, tidak ada <strong>noise</strong>—hanya sinyal murni.</p>            
+            <div class="story-image">
+                <img src="../lempang.jpeg" alt="Primary person">
+            </div>
+            <p>Menunjukan bahwa setiap desain adalah hasil dari revisi dan imajinasi yang di tuangkan ke permukaan kain. </p>        
+            <div class="story-image-1">
+            </div>
+            <h2>BUILT FOR THE STREET, REFINED FOR THE STUDIO.</h2>
+            <p>Kami percaya bahwa identitas tidak diteriakkan, melainkan dikenakan. SVRFACE adalah seragam bagi mereka yang bergerak dalam diam, berkarya tanpa batas, dan menolak untuk menjadi biasa.</p>
+            <p>More than a brand. It's a mindset. <strong>Welcome to SVRFACE.</strong></p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-left">SVRFACE.STUDIO</div>
+        <div class="footer-right">© 2024 - BEKASI, INDONESIA - SVRFACE.STUDIO</div>
+    </footer>
+
+</body>
+</html>
